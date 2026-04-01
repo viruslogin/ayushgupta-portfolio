@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayush Gupta — SDET & Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#020810;
+  --deep:#040c18;
+  --dark:#071020;
+  --card:#0a1628;
+  --card2:#0d1c35;
+  --gold:#c8a84b;
+  --gold2:#e8c96a;
+  --gold3:#f5e0a0;
+  --cyan:#00d4ff;
+  --cyan2:#00a8cc;
+  --green:#00ff88;
+  --green2:#00cc6a;
+  --text:#e8f0f8;
+  --text-muted:#6a85a8;
+  --text-dim:#2a3d5a;
+  --border-gold:rgba(200,168,75,0.18);
+  --border-cyan:rgba(0,212,255,0.12);
+  --border-dim:rgba(255,255,255,0.05);
+  --gold-glow:rgba(200,168,75,0.06);
+  --cyan-glow:rgba(0,212,255,0.05);
+  --font-mono:'JetBrains Mono',monospace;
+  --font-head:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 5vw;
+  transition:all 0.4s;
+}
+nav.scrolled{background:rgba(2,8,16,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-dim)}
+.nav-logo{display:flex;align-items:center;gap:0.8rem}
+.nav-logo-mark{
+  width:32px;height:32px;border:1px solid var(--border-gold);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gold-glow);
+  font-family:var(--font-mono);font-size:0.7rem;font-weight:500;color:var(--gold);
+  letter-spacing:0;
+}
+.nav-logo-text{font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--text);letter-spacing:-0.01em}
+.nav-logo-text span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--text-muted);font-family:var(--font-mono);font-size:0.72rem;
+  text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;
+  display:flex;align-items:center;gap:0.3rem;
+}
+.nav-links a .ln{color:var(--text-dim);font-size:0.62rem}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  padding:0.55rem 1.4rem;border:1px solid var(--border-gold);
+  color:var(--gold);background:var(--gold-glow);
+  font-family:var(--font-mono);font-size:0.72rem;font-weight:500;
+  cursor:pointer;border-radius:3px;text-decoration:none;
+  letter-spacing:0.08em;transition:all 0.25s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:9rem 5vw 5rem;position:relative;overflow:hidden;
+}
+/* Animated grid */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);
+  background-size:50px 50px;
+  animation:grid-drift 20s linear infinite;
+}
+@keyframes grid-drift{0%{background-position:0 0}100%{background-position:50px 50px}}
+.hero-scan{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),transparent);
+  animation:scan 6s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes scan{0%,100%{top:-2px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%}}
+.hero-orb{
+  position:absolute;top:-10%;right:-5%;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,168,75,0.07) 0%,transparent 65%);
+  pointer-events:none;animation:orb-breathe 8s ease-in-out infinite;
+}
+@keyframes orb-breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:0.7}}
+.hero-corner{position:absolute;font-family:var(--font-mono);font-size:0.62rem;color:var(--text-dim);letter-spacing:0.05em}
+.hero-corner.tl{top:7rem;left:5vw}
+.hero-corner.tr{top:7rem;right:5vw;text-align:right}
+.hero-corner.bl{bottom:3rem;left:5vw}
+.hero-corner.br{bottom:3rem;right:5vw;text-align:right}
+
+/* Terminal tag */
+.term-tag{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--font-mono);font-size:0.72rem;
+  color:var(--green);background:rgba(0,255,136,0.06);
+  border:1px solid rgba(0,255,136,0.18);
+  padding:0.4rem 0.9rem;border-radius:3px;
+  margin-bottom:2rem;letter-spacing:0.04em;
+}
+.term-prompt{color:var(--text-dim)}
+.term-cursor{
+  display:inline-block;width:8px;height:12px;
+  background:var(--green);margin-left:2px;
+  animation:blink 1s step-end infinite;
+  vertical-align:middle;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-name{
+  font-family:var(--font-head);
+  font-size:clamp(3.5rem,8vw,7.5rem);
+  font-weight:800;line-height:0.95;letter-spacing:-0.03em;
+  margin-bottom:0.5rem;
+}
+.hero-name .line2{
+  display:block;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold2) 50%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-role{
+  font-family:var(--font-mono);font-size:clamp(0.85rem,1.8vw,1.1rem);
+  color:var(--text-muted);margin-bottom:2rem;letter-spacing:0.06em;
+}
+.hero-role .hl{color:var(--cyan)}
+.hero-desc{
+  font-size:1rem;color:var(--text-muted);font-weight:300;
+  max-width:500px;line-height:1.85;margin-bottom:2rem;
+  border-left:2px solid var(--border-gold);padding-left:1.2rem;
+}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:3rem}
+.meta-chip{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:var(--font-mono);font-size:0.7rem;
+  color:var(--text-dim);letter-spacing:0.04em;
+}
+.meta-chip svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0}
+
+/* BUTTONS */
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.9rem 2rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--black);font-family:var(--font-mono);font-size:0.78rem;
+  font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  border:none;border-radius:3px;cursor:pointer;text-decoration:none;
+  transition:all 0.3s;box-shadow:0 4px 20px rgba(200,168,75,0.3);
+  position:relative;overflow:hidden;
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold2),var(--cyan2));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,168,75,0.45)}
+.btn-primary:hover::before{opacity:1}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.9rem 2rem;
+  background:transparent;color:var(--cyan);
+  font-family:var(--font-mono);font-size:0.78rem;
+  font-weight:400;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--border-cyan);border-radius:3px;cursor:pointer;text-decoration:none;
+  transition:all 0.25s;
+}
+.btn-secondary:hover{background:var(--cyan-glow);border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,0.1)}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border-dim);
+  margin-top:4rem;border:1px solid var(--border-dim);
+}
+.hstat{
+  background:var(--deep);padding:1.4rem;
+  display:flex;flex-direction:column;
+  transition:background 0.2s;
+}
+.hstat:hover{background:var(--card)}
+.hstat-n{
+  font-family:var(--font-mono);font-size:1.8rem;font-weight:500;
+  color:var(--gold2);line-height:1;letter-spacing:-0.02em;
+}
+.hstat-l{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-dim);margin-top:0.35rem;letter-spacing:0.06em;text-transform:uppercase}
+.hstat-comment{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-dim);margin-top:0.2rem}
+
+/* SECTION */
+section{padding:7rem 5vw;position:relative;z-index:1}
+.sec-label{
+  display:flex;align-items:center;gap:0.6rem;
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--cyan);
+  letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem;
+}
+.sec-label::before{content:'//';color:var(--text-dim)}
+.sec-h{
+  font-family:var(--font-head);font-size:clamp(2.2rem,4.5vw,3.5rem);
+  font-weight:800;line-height:1.05;letter-spacing:-0.02em;
+  color:var(--text);margin-bottom:1rem;
+}
+.sec-h em{font-style:normal;color:var(--gold2)}
+.sec-sub{color:var(--text-muted);font-size:0.95rem;font-weight:300;max-width:460px;line-height:1.85}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-dim),transparent);margin:0 5vw}
+
+/* CODE BLOCK accent */
+.code-accent{
+  font-family:var(--font-mono);font-size:0.72rem;
+  color:var(--text-dim);background:var(--card);
+  border:1px solid var(--border-dim);border-radius:3px;
+  padding:0.8rem 1rem;margin-bottom:2rem;
+  display:inline-block;
+}
+.ca-kw{color:var(--cyan)}
+.ca-str{color:var(--gold2)}
+.ca-comment{color:var(--text-dim)}
+.ca-fn{color:#b8a0ff}
+.ca-num{color:var(--green)}
+
+/* ABOUT */
+#about{background:var(--deep)}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;align-items:start}
+.about-p{font-size:0.92rem;color:var(--text-muted);font-weight:300;line-height:1.9;margin-bottom:1rem}
+.about-p strong{color:var(--text);font-weight:400}
+.kpi-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-dim);margin-top:2rem}
+.kpi{background:var(--card);padding:1.2rem;text-align:center;transition:background 0.2s}
+.kpi:hover{background:var(--card2)}
+.kpi-n{font-family:var(--font-mono);font-size:1.5rem;font-weight:500;color:var(--gold2);line-height:1}
+.kpi-l{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-dim);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.08em}
+
+/* Exp card */
+.exp-block{border:1px solid var(--border-gold);background:var(--card);border-radius:3px;overflow:hidden}
+.exp-header{
+  padding:1.6rem 1.8rem;
+  background:linear-gradient(135deg,rgba(200,168,75,0.08),transparent);
+  border-bottom:1px solid var(--border-dim);
+}
+.exp-co{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--gold2);letter-spacing:-0.01em}
+.exp-role{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);margin-top:0.25rem;letter-spacing:0.04em}
+.exp-period{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:var(--font-mono);font-size:0.65rem;
+  padding:0.25rem 0.7rem;margin-top:0.7rem;
+  border:1px solid rgba(0,255,136,0.25);color:var(--green);
+  border-radius:2px;letter-spacing:0.06em;background:rgba(0,255,136,0.04);
+}
+.exp-period .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s ease infinite}
+.exp-body{padding:1.5rem 1.8rem}
+.exp-li{
+  display:flex;align-items:flex-start;gap:0.75rem;
+  padding:0.55rem 0;border-bottom:1px solid var(--border-dim);
+  font-size:0.855rem;color:var(--text-muted);font-weight:300;line-height:1.65;
+}
+.exp-li:last-child{border-bottom:none}
+.exp-li::before{content:'>';font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);margin-top:0.2rem;flex-shrink:0}
+.edu-card{margin-top:1.2rem;border:1px solid var(--border-dim);background:var(--dark);border-radius:3px;padding:1.3rem 1.5rem}
+.edu-deg{font-family:var(--font-head);font-size:0.95rem;font-weight:700;color:var(--text)}
+.edu-inst{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);margin-top:0.25rem}
+
+/* SERVICES */
+#services{background:var(--black)}
+.svc-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;flex-wrap:wrap;margin-bottom:4rem}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-dim)}
+.svc{
+  background:var(--deep);padding:2.2rem;
+  position:relative;overflow:hidden;transition:background 0.3s;
+}
+.svc-top-bar{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:-2.2rem -2.2rem 2rem -2.2rem;transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
+.svc:hover .svc-top-bar{transform:scaleX(1)}
+.svc:hover{background:var(--card)}
+.svc-num{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-dim);margin-bottom:1.2rem;letter-spacing:0.1em}
+.svc-icon{
+  width:42px;height:42px;border:1px solid var(--border-gold);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;background:var(--gold-glow);border-radius:3px;
+}
+.svc-icon svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.svc-title{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.7rem}
+.svc-desc{font-size:0.83rem;color:var(--text-muted);font-weight:300;line-height:1.75}
+.svc-tools{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:1.2rem}
+.badge{
+  font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.06em;
+  padding:0.18rem 0.55rem;border:1px solid var(--border-gold);
+  color:var(--gold);border-radius:2px;
+}
+
+/* PROJECTS */
+#projects{background:var(--deep)}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:4rem}
+.proj{
+  border:1px solid var(--border-dim);background:var(--card);
+  border-radius:3px;overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  cursor:default;
+}
+.proj:hover{border-color:var(--border-gold);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(200,168,75,0.07)}
+.proj-bar{height:3px;background:linear-gradient(90deg,var(--gold),var(--cyan));background-size:200% 100%;transition:background-position 0.5s}
+.proj:hover .proj-bar{background-position:100% 0}
+.proj-head{padding:1.4rem 1.6rem;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center}
+.proj-id{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em}
+.proj-badge{font-family:var(--font-mono);font-size:0.6rem;padding:0.18rem 0.6rem;border-radius:2px;font-weight:500;letter-spacing:0.08em}
+.badge-live{background:rgba(0,255,136,0.08);color:var(--green);border:1px solid rgba(0,255,136,0.25)}
+.badge-done{background:rgba(106,133,168,0.08);color:var(--text-muted);border:1px solid rgba(106,133,168,0.2)}
+.proj-body{padding:1.6rem}
+.proj-title{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:0.65rem;line-height:1.3}
+.proj-desc{font-size:0.83rem;color:var(--text-muted);font-weight:300;line-height:1.75;margin-bottom:1.2rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.3rem}
+.pill{font-family:var(--font-mono);font-size:0.6rem;padding:0.18rem 0.55rem;background:var(--dark);border:1px solid var(--border-dim);border-radius:2px;color:var(--text-dim)}
+
+/* SKILLS */
+#skills{background:var(--black)}
+.skills-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:6rem;margin-top:4rem}
+.skill-cat{margin-bottom:2.2rem}
+.skill-cat-t{font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--cyan);margin-bottom:1.1rem}
+.skill-row{margin-bottom:1rem}
+.skill-top{display:flex;justify-content:space-between;margin-bottom:0.5rem;align-items:center}
+.skill-name{font-family:var(--font-body);font-size:0.85rem;color:var(--text);font-weight:300}
+.skill-meta{display:flex;align-items:center;gap:0.6rem}
+.skill-pct{font-family:var(--font-mono);font-size:0.7rem;color:var(--gold2)}
+.skill-track{height:2px;background:var(--border-dim);border-radius:2px;overflow:hidden;position:relative}
+.skill-fill{
+  height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width 1.4s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+}
+.skill-fill::after{
+  content:'';position:absolute;right:0;top:50%;
+  transform:translateY(-50%);width:5px;height:5px;
+  border-radius:50%;background:var(--gold2);
+  box-shadow:0 0 8px var(--gold);
+}
+.cert{
+  display:flex;align-items:center;gap:0.9rem;
+  padding:1rem 1.2rem;margin-bottom:0.7rem;
+  border:1px solid var(--border-dim);background:var(--card);border-radius:3px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.cert:hover{border-color:var(--border-gold);background:var(--card2)}
+.cert-ico{
+  width:36px;height:36px;border-radius:3px;background:var(--gold-glow);
+  border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cert-ico svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.cert-n{font-size:0.83rem;font-weight:400;color:var(--text)}
+.cert-i{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);margin-top:0.15rem}
+
+/* TERMINAL SECTION */
+#terminal-section{background:var(--deep);padding:5rem 5vw}
+.terminal-wrap{
+  max-width:780px;margin:0 auto;
+  border:1px solid var(--border-dim);border-radius:6px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.term-titlebar{
+  display:flex;align-items:center;gap:0.6rem;
+  background:var(--card2);padding:0.8rem 1rem;border-bottom:1px solid var(--border-dim);
+}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.term-dot.r{background:#ff5f56}.term-dot.y{background:#ffbd2e}.term-dot.g{background:#27c93f}
+.term-title{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-dim);margin-left:auto}
+.term-body{background:var(--deep);padding:1.5rem 1.5rem 1.5rem}
+.term-line{
+  font-family:var(--font-mono);font-size:0.8rem;line-height:1.9;
+  display:flex;gap:0.5rem;flex-wrap:wrap;align-items:baseline;
+}
+.t-prompt{color:var(--green)}.t-path{color:var(--cyan)}.t-cmd{color:var(--text)}
+.t-key{color:var(--cyan)}.t-val{color:var(--gold2)}.t-comment{color:var(--text-dim)}
+.t-str{color:var(--green2)}.t-num{color:#b8a0ff}.t-out{color:var(--text-muted);padding-left:1rem}
+
+/* PROCESS */
+#process{background:var(--black)}
+.proc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:5rem;border-top:1px solid var(--border-dim)}
+.proc{padding:2.5rem 1.5rem 0 0;position:relative}
+.proc::before{content:'';position:absolute;top:-1px;left:0;width:2rem;height:1px;background:var(--gold)}
+.proc-n{font-family:var(--font-mono);font-size:3rem;font-weight:500;color:rgba(200,168,75,0.1);line-height:1;margin-bottom:1rem}
+.proc-t{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem}
+.proc-d{font-size:0.82rem;color:var(--text-muted);font-weight:300;line-height:1.7}
+.proc-tag{font-family:var(--font-mono);font-size:0.6rem;color:var(--cyan);margin-top:0.75rem;letter-spacing:0.06em}
+
+/* CONTACT */
+#contact{background:var(--deep);overflow:hidden}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;position:relative;z-index:1}
+.c-title{font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-0.02em}
+.c-title em{font-style:normal;color:var(--gold2)}
+.c-desc{color:var(--text-muted);font-size:0.9rem;font-weight:300;line-height:1.85;margin-bottom:2.2rem}
+.c-link{display:flex;align-items:center;gap:0.9rem;margin-bottom:0.9rem;text-decoration:none}
+.c-link-ico{
+  width:40px;height:40px;border:1px solid var(--border-dim);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  background:var(--card);transition:border-color 0.2s,background 0.2s;
+}
+.c-link:hover .c-link-ico{border-color:var(--border-gold);background:var(--gold-glow)}
+.c-link-ico svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.c-link-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em}
+.c-link-val{font-size:0.85rem;color:var(--text);margin-top:0.1rem}
+.avail{
+  margin-top:2.2rem;padding:1.2rem 1.4rem;
+  border:1px solid var(--border-gold);background:var(--gold-glow);border-radius:3px;
+}
+.avail-t{font-family:var(--font-mono);font-size:0.78rem;color:var(--gold);display:flex;align-items:center;gap:0.5rem}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.5s ease infinite;flex-shrink:0}
+.avail-s{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);margin-top:0.4rem}
+
+/* FORM */
+.form-wrap{display:flex;flex-direction:column;gap:1rem}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.f-group{display:flex;flex-direction:column;gap:0.35rem}
+.f-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em}
+.f-inp,.f-sel,.f-ta{
+  background:var(--card);border:1px solid var(--border-dim);
+  color:var(--text);padding:0.8rem 0.95rem;
+  font-family:var(--font-body);font-size:0.875rem;border-radius:3px;
+  transition:border-color 0.25s,background 0.25s;width:100%;outline:none;
+}
+.f-inp:focus,.f-sel:focus,.f-ta:focus{border-color:var(--gold);background:var(--card2);box-shadow:0 0 0 3px rgba(200,168,75,0.05)}
+.f-ta{resize:vertical;min-height:120px;font-family:var(--font-body)}
+.f-sel option{background:var(--card)}
+.btn-form{
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  width:100%;padding:1rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--black);font-family:var(--font-mono);font-size:0.78rem;
+  font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  border:none;border-radius:3px;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 4px 20px rgba(200,168,75,0.25);
+  position:relative;overflow:hidden;
+}
+.btn-form::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold2),var(--cyan2));opacity:0;transition:opacity 0.3s}
+.btn-form:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,168,75,0.4)}
+.btn-form:hover::before{opacity:1}
+.btn-form span{position:relative;z-index:1}
+.btn-form:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+
+/* FOOTER */
+footer{
+  background:var(--black);padding:2.5rem 5vw;
+  border-top:1px solid var(--border-dim);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  position:relative;z-index:1;
+}
+.foot-logo{font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted)}
+.foot-logo span{color:var(--gold)}
+.foot-copy{font-family:var(--font-mono);font-size:0.65rem;color:var(--text-dim)}
+.foot-soc{display:flex;gap:0.6rem}
+.soc{
+  width:34px;height:34px;border:1px solid var(--border-dim);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);text-decoration:none;
+  transition:border-color 0.2s,color 0.2s,background 0.2s;
+}
+.soc:hover{border-color:var(--border-gold);color:var(--gold);background:var(--gold-glow)}
+.soc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* TOAST */
+#toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:999;
+  background:var(--card2);border:1px solid var(--border-gold);border-radius:4px;
+  padding:1rem 1.5rem;font-family:var(--font-mono);font-size:0.78rem;color:var(--gold);
+  transform:translateY(100px);opacity:0;transition:all 0.4s;pointer-events:none;
+  display:flex;align-items:center;gap:0.6rem;
+}
+#toast.show{transform:translateY(0);opacity:1}
+#toast .toast-icon{color:var(--green);font-size:1rem}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .about-grid,.skills-grid,.contact-grid{grid-template-columns:1fr;gap:3rem}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hero-corner.tr,.hero-corner.br{display:none}
+}
+@media(max-width:600px){
+  .svc-grid,.form-row-2{grid-template-columns:1fr}
+  .hero-corner{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div id="toast"><span class="toast-icon">✓</span><span id="toast-msg">Message sent successfully!</span></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">AG</div>
+    <div class="nav-logo-text">Test<span>Forge</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about"><span class="ln">01.</span> About</a></li>
+    <li><a href="#services"><span class="ln">02.</span> Services</a></li>
+    <li><a href="#projects"><span class="ln">03.</span> Projects</a></li>
+    <li><a href="#skills"><span class="ln">04.</span> Skills</a></li>
+    <li><a href="#process"><span class="ln">05.</span> Process</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">$ hire_me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-corner tl"><span style="color:var(--gold)">// </span>v2.4.1 · portfolio.py</div>
+  <div class="hero-corner tr">status: <span style="color:var(--green)">AVAILABLE</span></div>
+  <div class="hero-corner bl">lat:28.4595°N · lon:77.0266°E</div>
+  <div class="hero-corner br">build: <span style="color:var(--cyan)">PASSING</span></div>
+
+  <div class="term-tag">
+    <span class="term-prompt">~$</span>
+    <span>python run_portfolio.py --engineer ayush_gupta</span>
+    <span class="term-cursor"></span>
+  </div>
+
+  <h1 class="hero-name">
+    Ayush<br>
+    <span class="line2">Gupta</span>
+  </h1>
+  <div class="hero-role">
+    <span class="hl">SDET</span> &nbsp;·&nbsp; Automation Test Engineer &nbsp;·&nbsp; <span class="hl">ADAS</span> Specialist
+  </div>
+  <p class="hero-desc">4+ years crafting Python automation frameworks for Automotive Diagnostics & ADAS Calibration at <strong>FORVIA HELLA</strong>. ISTQB Certified · Germany onsite · Automotive domain expert.</p>
+  <div class="hero-meta">
+    <span class="meta-chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Gurugram, Haryana</span>
+    <span class="meta-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>ayush29business@gmail.com</span>
+    <span class="meta-chip"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6.81-7.38 19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.91 8.6a16 16 0 006.29 6.29l.96-.96a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>+91 8439329998</span>
+    <span class="meta-chip"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/ayush-login</span>
+  </div>
+
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary"><span>View My Work</span><span>→</span></a>
+    <a href="#contact" class="btn-secondary">Get In Touch →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-n">4+</div>
+      <div class="hstat-l">Years Experience</div>
+      <div class="hstat-comment">// Nov 2021 → Present</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">~40%</div>
+      <div class="hstat-l">Effort Reduced</div>
+      <div class="hstat-comment">// manual_tests -= 0.4</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">ISTQB</div>
+      <div class="hstat-l">Certified</div>
+      <div class="hstat-comment">// cert.status = VALID</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">🇩🇪</div>
+      <div class="hstat-l">Germany Onsite</div>
+      <div class="hstat-comment">// location: HELLA HQ</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="sec-label">About Me</div>
+      <h2 class="sec-h">Automotive-Grade<br><em>Precision</em></h2>
+      <div class="code-accent">
+        <span class="ca-kw">class</span> <span style="color:var(--gold2)">AyushGupta</span>(<span class="ca-kw">Engineer</span>):<br>
+        &nbsp;&nbsp;<span class="ca-kw">def</span> <span class="ca-fn">__init__</span>(self):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;self.role = <span class="ca-str">"SDET"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;self.exp = <span class="ca-num">4</span>  <span class="ca-comment"># years</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;self.domain = <span class="ca-str">"Automotive"</span>
+      </div>
+      <p class="about-p">I'm a <strong>Software Automation Test Engineer</strong> specializing in Automotive Diagnostics and ADAS Calibration. At <strong>FORVIA HELLA</strong> since 2021, I build Python + PyTest + Selenium frameworks that validate vehicle diagnostic software used by leading OEMs.</p>
+      <p class="about-p">My work spans UI regression suites to ECU-level diagnostic protocol testing — including camera and radar ADAS calibration workflows. I've worked onsite at FORVIA HELLA's Germany office gaining direct OEM QA standards exposure.</p>
+      <p class="about-p">Outside automotive, I bring the same precision-first mindset to any domain — web, API, mobile — wherever reliable software matters.</p>
+      <div class="kpi-strip">
+        <div class="kpi"><div class="kpi-n">~40%</div><div class="kpi-l">Effort Saved</div></div>
+        <div class="kpi"><div class="kpi-n">4+</div><div class="kpi-l">Years @ HELLA</div></div>
+        <div class="kpi"><div class="kpi-n">100%</div><div class="kpi-l">Automotive</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-label">Experience</div>
+      <div class="exp-block">
+        <div class="exp-header">
+          <div class="exp-co">FORVIA HELLA</div>
+          <div class="exp-role">// Software Automation Test Engineer</div>
+          <div class="exp-period"><span class="live-dot"></span> Nov 2021 – Present · Active</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-li">Built and maintained Python + PyTest + Selenium frameworks for automotive diagnostic applications.</div>
+          <div class="exp-li">Automated regression suites — reducing manual testing effort by ~40%.</div>
+          <div class="exp-li">Performed end-to-end ADAS calibration diagnostic validation (camera/radar workflows).</div>
+          <div class="exp-li">Executed system, integration, and functional testing on vehicle diagnostic software.</div>
+          <div class="exp-li">Designed test cases, analyzed requirements, collaborated with developers.</div>
+          <div class="exp-li">Logged and tracked defects in Jira; supported CI pipelines and release testing.</div>
+          <div class="exp-li">Germany office visit — ADAS project understanding & system-level validation.</div>
+          <div class="exp-li">Stabilized flaky test cases, improving overall CI pipeline reliability.</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="sec-label" style="margin-bottom:0.5rem">Education</div>
+        <div class="edu-deg">B.Tech — Computer Science Engineering</div>
+        <div class="edu-inst">// G.L. Bajaj Institute of Technology & Management, Greater Noida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="svc-intro reveal">
+    <div>
+      <div class="sec-label">What I Do</div>
+      <h2 class="sec-h">Testing <em>Services</em></h2>
+    </div>
+    <p class="sec-sub">From ADAS calibration to web regression — precision automation built to last.</p>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 01</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="svc-title">Web UI Automation</div>
+      <div class="svc-desc">Robust Selenium-based browser test suites covering functional, regression, and integration scenarios — built with clean POM architecture.</div>
+      <div class="svc-tools"><span class="badge">Selenium</span><span class="badge">Python</span><span class="badge">PyTest</span></div>
+    </div>
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 02</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+      <div class="svc-title">API & Backend Testing</div>
+      <div class="svc-desc">REST API validation, backend log analysis, and ECU communication protocol verification — for automotive and web applications alike.</div>
+      <div class="svc-tools"><span class="badge">REST API</span><span class="badge">Python</span><span class="badge">Linux</span></div>
+    </div>
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 03</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="svc-title">ADAS Calibration Testing</div>
+      <div class="svc-desc">End-to-end validation of ADAS calibration workflows — camera and radar ECU diagnostics — backed by hands-on automotive domain expertise.</div>
+      <div class="svc-tools"><span class="badge">ADAS</span><span class="badge">ECU</span><span class="badge">Diagnostics</span></div>
+    </div>
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 04</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="svc-title">Framework Architecture</div>
+      <div class="svc-desc">Scalable, reusable automation frameworks from scratch — data-driven, fixture-based, with Python utilities and zero test coupling.</div>
+      <div class="svc-tools"><span class="badge">PyTest</span><span class="badge">Python</span><span class="badge">Git</span></div>
+    </div>
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 05</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="svc-title">CI/CD Integration</div>
+      <div class="svc-desc">Integrate test suites into pipelines for automated validation on every build — with Jira defect tracking and release support throughout.</div>
+      <div class="svc-tools"><span class="badge">CI/CD</span><span class="badge">Git</span><span class="badge">Jira</span></div>
+    </div>
+    <div class="svc">
+      <div class="svc-top-bar"></div>
+      <div class="svc-num">// 06</div>
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="svc-title">Regression & Functional QA</div>
+      <div class="svc-desc">Systematic test case design, requirement analysis, and full defect lifecycle management — raising quality and shrinking release cycles.</div>
+      <div class="svc-tools"><span class="badge">Functional</span><span class="badge">Regression</span><span class="badge">Jira</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="sec-label">Portfolio</div>
+    <h2 class="sec-h">Featured <em>Projects</em></h2>
+    <p class="sec-sub">Real automation work from FORVIA HELLA — production-grade quality engineering.</p>
+  </div>
+  <div class="proj-grid reveal">
+    <div class="proj">
+      <div class="proj-bar"></div>
+      <div class="proj-head"><span class="proj-id">project_01.py</span><span class="proj-badge badge-live">● LIVE</span></div>
+      <div class="proj-body">
+        <div class="proj-title">ADAS Calibration Automation Suite</div>
+        <div class="proj-desc">End-to-end automated calibration workflows for camera and radar ECU systems. Developed a reusable Python utility library for ADAS sensor diagnostic validation — eliminating manual calibration test cycles for targeted modules.</div>
+        <div class="proj-stack"><span class="pill">Python</span><span class="pill">PyTest</span><span class="pill">ECU Diagnostics</span><span class="pill">ADAS Camera</span><span class="pill">ADAS Radar</span></div>
+      </div>
+    </div>
+    <div class="proj">
+      <div class="proj-bar"></div>
+      <div class="proj-head"><span class="proj-id">project_02.py</span><span class="proj-badge badge-live">● LIVE</span></div>
+      <div class="proj-body">
+        <div class="proj-title">Vehicle Diagnostic Testing Framework</div>
+        <div class="proj-desc">Core regression framework for FORVIA HELLA's vehicle diagnostic software — Selenium UI automation with backend log and REST API validation. Reduced manual testing effort by ~40% across all diagnostic modules.</div>
+        <div class="proj-stack"><span class="pill">Selenium</span><span class="pill">Python</span><span class="pill">PyTest</span><span class="pill">REST API</span><span class="pill">Linux</span></div>
+      </div>
+    </div>
+    <div class="proj">
+      <div class="proj-bar"></div>
+      <div class="proj-head"><span class="proj-id">project_03.py</span><span class="proj-badge badge-done">DELIVERED</span></div>
+      <div class="proj-body">
+        <div class="proj-title">CI Pipeline Stabilization</div>
+        <div class="proj-desc">Diagnosed and resolved flaky test cases across diagnostic modules — restoring CI pipeline reliability. Root-cause analysis covered timing, state, and environment-dependent failures across the entire test suite.</div>
+        <div class="proj-stack"><span class="pill">PyTest</span><span class="pill">Python</span><span class="pill">CI/CD</span><span class="pill">Jira</span><span class="pill">Git</span></div>
+      </div>
+    </div>
+    <div class="proj">
+      <div class="proj-bar"></div>
+      <div class="proj-head"><span class="proj-id">project_04.py</span><span class="proj-badge badge-done">ONSITE · 🇩🇪</span></div>
+      <div class="proj-body">
+        <div class="proj-title">System-Level ADAS Validation · Germany</div>
+        <div class="proj-desc">System-level ADAS project validation at FORVIA HELLA's Germany HQ — direct exposure to hardware integration, OEM automotive QA standards, and cross-border engineering collaboration.</div>
+        <div class="proj-stack"><span class="pill">ADAS</span><span class="pill">System Testing</span><span class="pill">Automotive QA</span><span class="pill">OEM Standards</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="sec-label">Expertise</div>
+    <h2 class="sec-h">Skills & <em>Certifications</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="reveal">
+      <div class="skill-cat">
+        <div class="skill-cat-t">// Languages & Frameworks</div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Python</span><div class="skill-meta"><span class="skill-pct">92%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="92"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">PyTest</span><div class="skill-meta"><span class="skill-pct">92%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="92"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Selenium WebDriver</span><div class="skill-meta"><span class="skill-pct">90%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="90"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">REST API Testing</span><div class="skill-meta"><span class="skill-pct">78%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="78"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-t">// Tools & DevOps</div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Jira</span><div class="skill-meta"><span class="skill-pct">88%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Git</span><div class="skill-meta"><span class="skill-pct">85%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="85"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Linux</span><div class="skill-meta"><span class="skill-pct">78%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="78"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">CI/CD Pipelines</span><div class="skill-meta"><span class="skill-pct">74%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="74"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-t">// Automotive Domain</div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">ADAS Calibration Testing</span><div class="skill-meta"><span class="skill-pct">90%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="90"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Vehicle Diagnostics</span><div class="skill-meta"><span class="skill-pct">88%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="88"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">ECU Validation</span><div class="skill-meta"><span class="skill-pct">85%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="85"></div></div></div>
+        <div class="skill-row"><div class="skill-top"><span class="skill-name">Functional / Regression</span><div class="skill-meta"><span class="skill-pct">93%</span></div></div><div class="skill-track"><div class="skill-fill" data-width="93"></div></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-label" style="margin-bottom:1.4rem">Certifications & Education</div>
+      <div class="cert">
+        <div class="cert-ico"><svg viewBox="0 0 24 24"><path d="M12 15l-2 5-1-1-1 1-2-5M12 15l2 5 1-1 1 1 2-5M12 15V3M9 12l3 3 3-3"/></svg></div>
+        <div><div class="cert-n">ISTQB Foundation Level</div><div class="cert-i">// International Software Testing Qualifications Board</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div><div class="cert-n">4+ Years Automotive Domain</div><div class="cert-i">// FORVIA HELLA · Nov 2021 – Present</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-ico"><svg viewBox="0 0 24 24"><path d="M3 5h12M3 10h9M3 15h6"/><path d="M21 15l-5 5-3-3"/></svg></div>
+        <div><div class="cert-n">B.Tech — Computer Science Engineering</div><div class="cert-i">// G.L. Bajaj Institute, Greater Noida</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="cert-n">Basic German Language Proficiency</div><div class="cert-i">// Automotive Onsite · Germany Exposure</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL SHOWCASE -->
+<section id="terminal-section">
+  <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
+    <div class="sec-label" style="justify-content:center">Profile Summary</div>
+    <h2 class="sec-h" style="text-align:center">As Code</h2>
+  </div>
+  <div class="terminal-wrap reveal">
+    <div class="term-titlebar">
+      <div class="term-dot r"></div>
+      <div class="term-dot y"></div>
+      <div class="term-dot g"></div>
+      <div class="term-title">ayush_gupta_profile.py — Python 3.11</div>
+    </div>
+    <div class="term-body">
+      <div class="term-line"><span class="t-comment"># AYUSH GUPTA — SDET & Automation Engineer</span></div>
+      <div class="term-line">&nbsp;</div>
+      <div class="term-line"><span class="t-key">engineer</span> = {</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-val">"Ayush Gupta"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"Software Automation Test Engineer"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"company"</span>: <span class="t-val">"FORVIA HELLA"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"experience_yrs"</span>: <span style="color:#b8a0ff">4</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-val">"Gurugram, Haryana 🇮🇳"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"certifications"</span>: [<span class="t-val">"ISTQB Foundation Level"</span>],</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"languages"</span>: [<span class="t-val">"Python"</span>, <span class="t-val">"German (Basic)"</span>],</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"stack"</span>: [<span class="t-val">"Python"</span>, <span class="t-val">"PyTest"</span>, <span class="t-val">"Selenium"</span>, <span class="t-val">"Git"</span>, <span class="t-val">"Jira"</span>, <span class="t-val">"Linux"</span>],</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"domain"</span>: <span class="t-val">"Automotive Diagnostics + ADAS Calibration"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"achievements"</span>: {</div>
+      <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-key">"effort_reduced"</span>: <span class="t-val">"~40%"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-key">"onsite_countries"</span>: [<span class="t-val">"Germany 🇩🇪"</span>],</div>
+      <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-key">"pipeline_stability"</span>: <span class="t-val">"improved"</span>,</div>
+      <div class="term-line">&nbsp;&nbsp;},</div>
+      <div class="term-line">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-str">"OPEN_TO_WORK"</span>,</div>
+      <div class="term-line">}</div>
+      <div class="term-line">&nbsp;</div>
+      <div class="term-line"><span class="t-prompt">~$</span> <span class="t-cmd">python -c "print(engineer['status'])"</span></div>
+      <div class="term-line t-out" style="color:var(--green)">OPEN_TO_WORK</div>
+      <div class="term-line"><span class="t-prompt">~$</span> <span class="term-cursor" style="background:var(--gold)"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="reveal">
+    <div class="sec-label">Methodology</div>
+    <h2 class="sec-h">How I <em>Work</em></h2>
+    <p class="sec-sub">A structured approach refined over 4+ years of real automotive diagnostic software validation.</p>
+  </div>
+  <div class="proc-grid reveal">
+    <div class="proc">
+      <div class="proc-n">01</div>
+      <div class="proc-t">Requirements Analysis</div>
+      <div class="proc-d">Deep-dive into specs to define what "correct" looks like before writing any test.</div>
+      <div class="proc-tag">// requirements.parse()</div>
+    </div>
+    <div class="proc">
+      <div class="proc-n">02</div>
+      <div class="proc-t">Test Case Design</div>
+      <div class="proc-d">Traceable test cases covering functional, regression, and integration scenarios.</div>
+      <div class="proc-tag">// testcases.generate()</div>
+    </div>
+    <div class="proc">
+      <div class="proc-n">03</div>
+      <div class="proc-t">Framework Build</div>
+      <div class="proc-d">Clean Python + PyTest frameworks with reusable utilities and zero test coupling.</div>
+      <div class="proc-tag">// framework.build()</div>
+    </div>
+    <div class="proc">
+      <div class="proc-n">04</div>
+      <div class="proc-t">CI Integration</div>
+      <div class="proc-d">Tests wired into pipelines — automated on every build with Jira defect tracking.</div>
+      <div class="proc-tag">// pipeline.deploy()</div>
+    </div>
+    <div class="proc">
+      <div class="proc-n">05</div>
+      <div class="proc-t">Stabilize & Evolve</div>
+      <div class="proc-d">Eliminate flakiness, expand coverage, keep pipelines green release after release.</div>
+      <div class="proc-tag">// pipeline.status = OK</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="sec-label">Get In Touch</div>
+      <div class="c-title">Let's Build<br>Something <em>Solid</em></div>
+      <p class="c-desc">Looking for a Senior SDET, Automation Engineer, or ADAS Validation specialist? I'd love to hear about your role or project. Responds within 24 hours.</p>
+      <a href="mailto:ayush29business@gmail.com" class="c-link">
+        <div class="c-link-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="c-link-label">Email</div><div class="c-link-val">ayush29business@gmail.com</div></div>
+      </a>
+      <a href="tel:+918439329998" class="c-link">
+        <div class="c-link-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6.81-7.38 19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.91 8.6a16 16 0 006.29 6.29l.96-.96a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div><div class="c-link-label">Phone</div><div class="c-link-val">+91 8439329998</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/ayush-login/" target="_blank" class="c-link">
+        <div class="c-link-ico"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><div class="c-link-label">LinkedIn</div><div class="c-link-val">linkedin.com/in/ayush-login</div></div>
+      </a>
+      <div class="c-link">
+        <div class="c-link-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="c-link-label">Location</div><div class="c-link-val">Gurugram, Haryana · Open to Remote & Relocation</div></div>
+      </div>
+      <div class="avail">
+        <div class="avail-t"><span class="avail-dot"></span>Actively seeking Senior SDET / ADAS roles</div>
+        <div class="avail-s">// status: OPEN_TO_WORK · response_time: "24h"</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="form-wrap" id="contact-form" novalidate>
+        <div class="form-row-2">
+          <div class="f-group">
+            <label class="f-label">// first_name</label>
+            <input type="text" class="f-inp" id="fname" placeholder="Jane" required>
+          </div>
+          <div class="f-group">
+            <label class="f-label">// last_name</label>
+            <input type="text" class="f-inp" id="lname" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">// email_address</label>
+          <input type="email" class="f-inp" id="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="f-group">
+          <label class="f-label">// company</label>
+          <input type="text" class="f-inp" id="company" placeholder="Acme Technologies">
+        </div>
+        <div class="f-group">
+          <label class="f-label">// enquiry_type</label>
+          <select class="f-sel" id="enquiry">
+            <option value="" disabled selected>-- select type --</option>
+            <option>Full-time Job Offer</option>
+            <option>Contract / Freelance Project</option>
+            <option>ADAS / Automotive Testing</option>
+            <option>Web UI Automation</option>
+            <option>API & Backend Testing</option>
+            <option>Framework Architecture</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label class="f-label">// message</label>
+          <textarea class="f-ta" id="message" placeholder="Tell me about the role or project — tech stack, domain, timeline..." required></textarea>
+        </div>
+        <button type="submit" class="btn-form" id="submit-btn">
+          <span id="btn-text">send_message() →</span>
+        </button>
+        <div id="form-error" style="font-family:var(--font-mono);font-size:0.7rem;color:#ff6b6b;display:none;padding:0.5rem 0">// error: please fill all required fields</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo"><span style="color:var(--text-dim)">~/</span><span>ayush_gupta</span></div>
+  <div class="foot-copy">© 2025 Ayush Gupta · <span style="color:var(--text-dim)">built with</span> precision</div>
+  <div class="foot-soc">
+    <a href="https://www.linkedin.com/in/ayush-login/" target="_blank" class="soc" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="mailto:ayush29business@gmail.com" class="soc" title="Email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+    <a href="#" class="soc" title="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+// ── NAV SCROLL ──
+const navbar = document.getElementById('navbar');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+  navLinks.forEach(a => {
+    const href = a.getAttribute('href').replace('#','');
+    a.style.color = href === current ? 'var(--gold)' : '';
+  });
+}, { passive: true });
+
+// ── SMOOTH SCROLL for all anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── REVEAL ON SCROLL ──
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 90);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── SKILL BARS ──
+const skillObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 300);
+      });
+      skillObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.skills-grid').forEach(el => skillObs.observe(el));
+
+// ── TOAST ──
+function showToast(msg, isError) {
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toast-msg');
+  toast.querySelector('.toast-icon').textContent = isError ? '✕' : '✓';
+  toast.querySelector('.toast-icon').style.color = isError ? '#ff6b6b' : 'var(--green)';
+  toast.style.borderColor = isError ? 'rgba(255,107,107,0.4)' : 'var(--border-gold)';
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ── FORM SUBMIT ──
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fname = document.getElementById('fname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const errEl = document.getElementById('form-error');
+
+  // Validation
+  if (!fname || !email || !message) {
+    errEl.style.display = 'block';
+    setTimeout(() => errEl.style.display = 'none', 3000);
+    return;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    errEl.textContent = '// error: invalid email format';
+    errEl.style.display = 'block';
+    setTimeout(() => { errEl.style.display = 'none'; errEl.textContent = '// error: please fill all required fields'; }, 3000);
+    return;
+  }
+  errEl.style.display = 'none';
+
+  // Simulate send
+  const btn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  btn.disabled = true;
+  btnText.textContent = 'sending...';
+
+  setTimeout(() => {
+    btnText.textContent = '✓ message_sent()';
+    showToast('Message sent! Ayush will respond within 24 hours.', false);
+    setTimeout(() => {
+      btnText.textContent = 'send_message() →';
+      btn.disabled = false;
+      this.reset();
+    }, 3000);
+  }, 1200);
+});
+</script>
+</body>
+</html>
